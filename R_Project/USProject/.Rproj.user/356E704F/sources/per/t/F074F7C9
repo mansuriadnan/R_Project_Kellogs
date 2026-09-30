@@ -1,0 +1,25 @@
+{
+    "id": "F074F7C9",
+    "path": null,
+    "project_path": null,
+    "type": "r_code_browser",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1710741977638.0,
+    "source_on_save": false,
+    "relative_order": 9,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "context": "package:shinydashboard:::dashboardHeader"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1710398180,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1710741977638,
+    "read_only": false,
+    "read_only_alternatives": []
+}

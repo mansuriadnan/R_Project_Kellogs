@@ -1,0 +1,53 @@
+library(shiny)
+library(ggplot2)
+library(tibble)
+
+# Generate dummy data
+months <- seq(as.Date("2024-01-01"), by = "month", length.out = 12)
+revenue <- runif(12, min = 50000, max = 100000)  # Random revenue values
+expenses <- runif(12, min = 30000, max = 70000)  # Random expense values
+operating_profit <- revenue - expenses
+operating_profit_percentage <- (operating_profit / revenue) * 100
+
+# Create a data frame for one year profitability data
+profitability_data <- tibble(
+  Month = months,
+  Revenue = revenue,
+  Expenses = expenses,
+  Operating_Profit = operating_profit,
+  Operating_Profit_Percentage = operating_profit_percentage
+)
+
+# Define UI
+ui <- fluidPage(
+  titlePanel("Operating Profitability Data"),
+  sidebarLayout(
+    sidebarPanel(
+      # Sidebar content, if any
+    ),
+    mainPanel(
+      plotOutput("line_area_chart")
+    )
+  )
+)
+
+# Define server logic
+server <- function(input, output) {
+  # Render line area chart
+  output$line_area_chart <- renderPlot({
+    ggplot(profitability_data, aes(x = Month)) +
+      geom_area(aes(y = Operating_Profit, fill = "Operating Profit"), alpha = 0.3) +
+      geom_line(aes(y = Revenue, color = "Revenue")) +
+      geom_line(aes(y = Expenses, color = "Expenses")) +
+      geom_line(aes(y = Operating_Profit_Percentage, color = "Operating Profit Percentage")) +
+      scale_fill_manual(values = "blue", guide = FALSE) +
+      scale_color_manual(values = c("Revenue" = "green", "Expenses" = "red", "Operating Profit Percentage" = "orange")) +
+      labs(title = "Operating Profitability",
+           y = "Amount",
+           color = "Metric") +
+      theme_minimal()
+  })
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)

@@ -1,0 +1,10 @@
+ .sidebar-menu .nav-link 
+ {
+          color: white !important; /* Change color to White */
+ }
+ .nav-sidebar>.nav-item { margin-bottom: 30px; }
+ .sidebar 
+ { background-color: #343A40; /* Change sidebar background color */}
+ a.brand-link.bg-secondary {
+    border-bottom: none;
+}

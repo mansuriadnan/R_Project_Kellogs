@@ -1,0 +1,22 @@
+df <- data.frame(type = c("on", "ia", "n"),
+                 radius = c(2,3,4),
+                 value = c(10,21,22))
+
+library(ggplot2); library(ggforce)
+ggplot(df) +
+  geom_link(aes(x = radius, xend = radius,
+                y = 0, yend = value), 
+            size = 17, lineend = "round", color = "#bb353c") +
+  geom_link(aes(x = radius, xend = radius,
+                y = 0, yend = value, color = type), 
+            size = 16, lineend = "round") +
+  geom_label(aes(radius, y = 30, 
+                 label = paste(type, ": ", value)), hjust = 1.8) +
+  scale_x_continuous(limits = c(0,4)) +
+  scale_y_continuous(limits = c(0, 30)) +
+  scale_color_manual(values = c("on" = "#fff7f2", 
+                                "ia" = "#f8b68f", 
+                                "n" = "#e4593a")) +
+  guides(color = "none") +
+  coord_polar(theta = "y") + 
+  theme_void()

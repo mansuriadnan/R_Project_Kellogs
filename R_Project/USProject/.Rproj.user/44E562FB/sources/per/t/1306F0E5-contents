@@ -1,0 +1,104 @@
+library(bslib)
+library(shiny)
+library(htmltools)
+library(plotly)
+library(leaflet)
+library(shinydashboard)
+library(DT)
+
+# Create the data frame
+df <- data.frame(
+  Offtake = c("$96M", "$55M", "$30M", "$37M"),
+  `From YA` = c("+70%", "+79%", "+77%", "$37M"),
+  row.names = c("MAT", "P6M", "P3M", "YTD"),
+  stringsAsFactors = FALSE
+)
+
+# Add column names for better clarity
+colnames(df) <- c("Offtake", "From YA")
+
+# Create the DT table
+htmltable<- datatable(df, 
+          options = list(
+            paging = FALSE,
+            searching = FALSE,
+            ordering = FALSE,
+            info = FALSE
+          ),
+          rownames = TRUE) %>%
+  formatStyle(
+    "Offtake",
+    color = styleEqual("$96M", "#279EFF"),
+    fontSize = '14px',
+    fontWeight = 'bold',
+   # textAlign = 'center',
+    fontFamily = 'Montserrat',
+    textTransform = 'capitalize',
+  
+  ) %>%
+  formatStyle(
+    "From YA",
+    color = styleEqual("+70%", "green"),
+    fontSize = '14px',
+    fontWeight = 'bold',
+    #textAlign = 'center',
+    fontFamily = 'Montserrat',
+    textTransform = 'capitalize',
+    
+    
+  )
+
+title <-   div(
+  class = "header-outer",
+  div(
+    class = "header-outer-left",
+    h5("Offtake"),
+    span("Apr, 2023")
+  ),
+  div(
+    class = "header-outer-right",
+    h2("$10.4M"),
+    div(
+      class = "year-ago",
+      strong(
+        div(class = "arrow-color", HTML('<svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11" fill="none"><path d="M6 0L12 11H0L6 0Z" fill="#2F9300"></path></svg>')),
+        "112%"
+      ),
+      span("From Year Ago")
+    )
+  )
+)
+
+dashboardBody <- dashboardBody(
+  tags$head(tags$link(rel = "stylesheet", type="text/css", href="css/styledhaval.css")),
+   
+  
+   
+    box(title,id = "plot1",
+        valueBox(1000,"first value"),
+        valueBox(1000,"first value")
+        
+        ),
+  
+  
+    box(title,id = "plot2" ,
+        div(
+          class = "inner-div",
+          h3("This is an H3 heading inside the box."),
+          p("This is a paragraph inside the box.")
+        ),
+        valueBox(1000,"first value",width = 2),
+        valueBox(1000,"first value",color = "red",width = 2)),
+   
+    box(id = "plot3" ,title = "Offtake  Apr, 202",
+        valueBox(1000,"first value",width = 2),
+        valueBox(1000,"first value",width = 2)),
+    
+    box(id = "plot4" ,title = "Offtake  Apr, 202",
+        valueBox(1000,"first value",width = 2),
+        valueBox(1000,"first value",color = "red",width = 2)),
+    
+    box(htmltable)
+    
+    
+)

@@ -1,0 +1,23 @@
+df <- data.frame(x = c(50, 100), y = c(1:2),
+                 col = c("Bar 1", "Bar 2"))
+
+library(ggplot2)
+
+ggplot(df, aes(x = 0, xend = x, y = y, yend = y, color = col)) +
+  geom_hline(yintercept = c(1:2), size = 0, color = "#dfdfdf") +
+  geom_hline(yintercept = c(1:2), size = 0, color = "#f7f7f7") +
+  geom_segment(aes(color = col), size = 8, lineend = 'round') +
+  scale_color_manual(values = c("Bar 1" = "#FAA300", "Bar 2" = "#7492E3")) +
+  scale_y_continuous(limits = c(0, 5)) +
+  scale_x_continuous(limits = c(0, 100)) +
+  coord_polar() +
+  theme_void() +
+  labs(color = "") +
+  theme(
+    #legend.position = c(.95, .95),
+   # legend.justification = c("right", "top"),
+   # legend.box.just = "right",
+    legend.margin = margin(0, 5, 120, 0),
+    legend.position = "bottom",  # Position the legend at the bottom
+    legend.box = "circle",         # Style the legend box with rounded corners
+  )

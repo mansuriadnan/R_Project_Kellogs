@@ -1,0 +1,24 @@
+library(tibble)
+
+# Generate dummy data for one year
+months <- seq(as.Date("2024-01-01"), by = "month", length.out = 12)
+revenue <- runif(12, min = 50000, max = 100000)  # Random revenue values
+expenses <- runif(12, min = 30000, max = 70000)  # Random expense values
+
+# Calculate operating profit (revenue - expenses)
+operating_profit <- revenue - expenses
+
+# Calculate operating profit percentage (operating profit / revenue * 100)
+operating_profit_percentage <- (operating_profit / revenue) * 100
+
+# Create a data frame for one year profitability data
+profitability_data <- tibble(
+  Month = months,
+  Revenue = revenue,
+  Expenses = expenses,
+  Operating_Profit = operating_profit,
+  Operating_Profit_Percentage = operating_profit_percentage
+)
+
+# Print the profitability data
+print(profitability_data)

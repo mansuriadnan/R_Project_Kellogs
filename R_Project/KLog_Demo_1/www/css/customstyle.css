@@ -1,0 +1,42 @@
+.details-inner-boxes > div {
+    padding: 0px;
+    border-radius: 5px;
+    background: linear-gradient(242deg, #D7C0AE 1.54%, #EEE3CB 100%);
+    padding: 12px;
+    margin-right: 21px;
+    width: calc(50% - 20px);
+    margin: 0px 10px;
+}
+
+.info-box > .inner {
+  padding: 0px;
+  border: none !important;
+}
+
+.small-box {
+  background: transparent !important;
+  margin: 0px !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.small-box p {
+  margin: 0px;
+  border: none;
+}
+
+.small-box h3 {
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: #975D2E !important;
+}
+
+.inner p {
+  color: #132043;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: capitalize;
+}

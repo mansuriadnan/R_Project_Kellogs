@@ -1,0 +1,25 @@
+# Generate dummy monthly data
+set.seed(123)
+months <- seq(as.Date("2024-01-01"), by = "month", length.out = 12)
+sales <- sample(100:200, 12, replace = TRUE)
+
+# Create a data frame
+sales_data <- data.frame(Month = months, Sales = sales)
+
+print(sales_data)
+
+# Plotting the line area chart with interactive data labels
+library(ggplot2)
+library(plotly)
+
+p <- ggplot(sales_data, aes(x = Month, y = Sales)) +
+  geom_line(color = "blue") +
+  geom_area(fill = "blue", alpha = 0.3) +
+  # geom_text(aes(label = Sales), vjust = -0.5, size = 3, show.legend = FALSE) +  # Add data labels above the points
+  # labs(title = "Monthly Sales",
+  #      x = "Month",
+  #      y = "Sales") +
+  theme_minimal()
+
+# Convert ggplot to plotly for interactivity
+ggplotly(p, tooltip = c("x", "y", "text"), hoverinfo = "text")

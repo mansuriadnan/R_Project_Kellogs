@@ -1,0 +1,26 @@
+{
+    "id": "3FBA258B",
+    "path": "D:/Project/R_Project/Kellog_MSR_Client_Project_Second_Container/R/msr_page1.R",
+    "project_path": "R/msr_page1.R",
+    "type": "r_source",
+    "hash": "75908994",
+    "contents": "",
+    "dirty": false,
+    "created": 1713957313597.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "126,38",
+        "scrollLine": "119"
+    },
+    "folds": "381|57|390|2|\n415|83|424|2|\n417|16|423|4|\n",
+    "lastKnownWriteTime": 1714026036,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1714026036457,
+    "read_only": false,
+    "read_only_alternatives": []
+}

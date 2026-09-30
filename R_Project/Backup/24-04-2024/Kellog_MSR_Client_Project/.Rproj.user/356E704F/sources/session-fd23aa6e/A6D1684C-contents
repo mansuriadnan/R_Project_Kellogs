@@ -1,0 +1,42 @@
+set.seed(123)
+months <- seq(as.Date("2024-01-01"), by = "month", length.out = 12)
+sales <- sample(100:200, 12, replace = TRUE)
+
+# Create a data frame
+sales_data <- data.frame(Month = months, Sales = sales)
+
+# Plotting the line area chart with interactive data labels
+library(ggplot2)
+library(plotly)
+
+p <- sales_data 
+# filter(format(period, "%Y-%m") == .msr_page1_date_option)
+
+# print(filtered_data)
+
+# Define colors for the line and area
+.line_color <- "#BED2E0"
+.area_color <- "#E4F4FF"
+
+# Create the ggplot object with the filtered data
+p <- ggplot(filtered_data, aes(x = months, y = sales)) +
+  # Add a line plot with specified color and size
+  geom_line(color = .line_color, size = 0.5) +
+  # Add an area plot with specified fill color and transparency
+  geom_area(fill = .area_color, alpha = 0.3) +
+  # Apply minimal theme to the plot
+  theme_minimal() +
+  # Customize theme to remove axis titles, axis text, and gridlines
+  theme(
+    axis.title = element_blank(),
+    #axis.text = element_blank(),
+    axis.ticks.length = unit(0, "pt"),
+    plot.margin = margin(0, -6, -4, -6, "pt"), # Adjust margins
+    panel.grid.major = element_blank(), 
+    panel.grid.minor = element_blank()
+  )
+
+#print(p)
+
+# Convert ggplot to plotly for interactivity
+ggplotly(p, tooltip = c("x", "y", "text"), hoverinfo = "text")

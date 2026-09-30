@@ -1,0 +1,72 @@
+[
+  {
+    "date": "2020-04-01",
+    "population": 62,
+    "line": "MAT OFFTAKE"
+  },
+  {
+    "date": "2020-06-01",
+    "population": 59.8,
+    "line": "MAT OFFTAKE"
+  },
+  {
+    "date": "2020-08-01",
+    "population": 62.8,
+    "line": "MAT OFFTAKE"
+  },
+  {
+    "date": "2020-10-01",
+    "population": 73.1,
+    "line": "MAT OFFTAKE"
+  },
+  {
+    "date": "2020-12-01",
+    "population": 79.8,
+    "line": "MAT OFFTAKE"
+  },
+  {
+    "date": "2021-02-01",
+    "population": 84.2,
+    "line": "MAT OFFTAKE"
+  },
+  {
+    "date": "2021-04-01",
+    "population": 96,
+    "line": "MAT OFFTAKE"
+  },
+  {
+    "date": "2020-04-01",
+    "population": 16.8,
+    "line": "P3M OFFTAKE"
+  },
+  {
+    "date": "2020-06-01",
+    "population": 15,
+    "line": "P3M OFFTAKE"
+  },
+  {
+    "date": "2020-08-01",
+    "population": 18.2,
+    "line": "P3M OFFTAKE"
+  },
+  {
+    "date": "2020-10-01",
+    "population": 25,
+    "line": "P3M OFFTAKE"
+  },
+  {
+    "date": "2020-12-01",
+    "population": 28,
+    "line": "P3M OFFTAKE"
+  },
+  {
+    "date": "2021-02-01",
+    "population": 30,
+    "line": "P3M OFFTAKE"
+  },
+  {
+    "date": "2021-04-01",
+    "population": 27,
+    "line": "P3M OFFTAKE"
+  }
+]

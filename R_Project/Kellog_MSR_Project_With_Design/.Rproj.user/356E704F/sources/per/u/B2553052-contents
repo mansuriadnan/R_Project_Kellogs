@@ -1,0 +1,40 @@
+# Load the ggplot2 library
+library(ggplot2)
+library(tidyverse)
+
+# Sample data
+set.seed(123)
+df <- data.frame(
+  x = 1:10,
+  y = cumsum(rnorm(10))
+)
+
+# Load required libraries
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# Define the dataset
+dummy_op_profibility_data <- tibble(
+  ref = c("ya", "iop", "le", "ya", "iop", "le"),
+  ref_value = c(30, 45, 50, 110, 120, 130) * 1e4,
+  value = c(50, 50, 50, 140, 140, 140) * 1e4,
+  category = c("mtd", "mtd", "mtd", "ytd", "ytd", "ytd"),
+  period = as.Date("2024-04-01")
+)
+
+# Create the line area chart
+ggplot(dummy_op_profibility_data, aes(x = period, y = value, group = ref, fill = ref)) +
+  geom_area(alpha = 0.5) +  # Area
+  geom_line() +  # Line
+  theme_minimal() +  # Theme
+  labs(x = "Period", y = "Value") +  # Axis labels
+  theme(legend.position = "none")  # Remove legend
+
+
+
+# Create the line area chart without axes
+ggplot(monthly_data, aes(x = x, y = y)) +
+  geom_area(fill = "#E4F4FF", alpha = 0.5) +  # Area
+  geom_line(color = "#C7D8E5") +  # Line
+  theme_void()  # Remove axes

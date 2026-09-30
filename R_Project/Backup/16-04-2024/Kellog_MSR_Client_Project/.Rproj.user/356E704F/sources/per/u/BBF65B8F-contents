@@ -1,0 +1,64 @@
+library(shiny)
+library(plotly)
+library(dplyr)
+
+# Define UI
+ui <- fluidPage(
+  plotlyOutput("plot")
+)
+
+# Define server logic
+server <- function(input, output) {
+  # # Sample data
+  # data <- tibble(
+  #   period = seq(as.Date("2022-01-01"), by = "month", length.out = 12),
+  #   value = rnorm(12)
+  # )
+  # 
+  category <- "mtd" # Example category
+  
+  # Plot function
+  plot_offtake_trend <- function(data, category) {
+    filtered_data <- data %>%
+      filter(category == category)
+    
+    ggplot(filtered_data, aes(x = period, y = value, text = paste("Value:", value))) +
+      geom_line(color = "#D2DFE8", size = 0.5) +  # Single line
+      geom_area(fill = "#E4F4FF", alpha = 0.3) +  # Area under the line
+      theme_minimal() +
+      theme(
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank()
+      )
+  }
+  
+  output$plot <- renderPlotly({
+    
+    
+    dummy_op_profibility_data <- tibble(
+      ref = c("ya", "iop", "le", "ya", "iop", "le"),
+      ref_value = c(30, 45, 50, 110, 120, 130) * 1e4,
+      value = c(50, 50, 50, 140, 140, 140) * 1e4,
+      category = c("mtd", "mtd", "mtd", "ytd", "ytd", "ytd"),
+      period = as_date("2024-4-1")
+    )
+    
+    # Extract the starting date
+    start_date <- dummy_op_profibility_data$period[1]
+    
+    # Create a tibble with a sequence of dates covering 12 months
+    dates <- tibble(period = seq(start_date, by = "1 month", length.out = 12))
+    
+    # Replicate the sample data for each month
+    data <- map_dfr(dates$period, ~ mutate(dummy_op_profibility_data, period = .x))
+    
+    
+    plot_offtake_trend(data, category) %>%
+      ggplotly()
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)

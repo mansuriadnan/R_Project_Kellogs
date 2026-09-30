@@ -1,0 +1,16 @@
+---
+title: chart-container
+header-include: |
+  <script src="jdi_data_daily_files/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+head: |2+
+
+background-color: white
+
+---
+``````````{=html}
+<div id="htmlwidget_container">
+  <div class="chart-container html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-6b7912baa76040fdeb66" style="width:960px;height:500px;"></div>
+</div>
+<script type="application/json" data-for="htmlwidget-6b7912baa76040fdeb66">{"x":{"name":"script","attribs":{"src":"scriptJay.js"},"children":[]},"evals":[],"jsHooks":[]}</script>
+<script type="application/htmlwidget-sizing" data-for="htmlwidget-6b7912baa76040fdeb66">{"viewer":{"width":450,"height":350,"padding":15,"fill":true},"browser":{"width":960,"height":500,"padding":40,"fill":false}}</script>
+``````````

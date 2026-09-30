@@ -1,0 +1,22 @@
+library(ggplot2)
+ggplot(economics, aes(date, unemploy)) +
+  geom_area(fill = rgb(0, 0.5, 1, alpha = 0.5)) + 
+  labs(title = "Title of the plot",
+       subtitle = "Subtitle of the plot",
+       caption = "This is the caption",
+       tag = "Fig. 1") + 
+  theme(plot.title = element_text(family = "serif",              # Font family
+                                  face = "bold",                 # Font face
+                                  color = 4,                     # Font color
+                                  size = 15,                     # Font size
+                                  hjust = 1,                     # Horizontal adjustment
+                                  vjust = 1,                     # Vertical adjustment
+                                  angle = -10,                   # Font angle
+                                  lineheight = 1,                # Line spacing
+                                  margin = margin(20, 0, 0, 0)), # Margins (t, r, b, l)
+        plot.subtitle = element_text(hjust = 0),    # Subtitle customization
+        plot.caption = element_text(hjust = 0.25),  # Caption customization
+        plot.tag = element_text(face = "italic"),   # Tag customization
+        plot.title.position = "plot",               # Title and subtitle position ("plot" or "panel")
+        plot.caption.position = "panel",            # Caption position ("plot" or "panel")
+        plot.tag.position = "top")    

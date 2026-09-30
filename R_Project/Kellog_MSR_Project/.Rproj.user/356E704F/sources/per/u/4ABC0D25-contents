@@ -1,0 +1,42 @@
+# Load required libraries
+library(shiny)
+library(ggplot2)
+
+# Define UI
+ui <- fluidPage(
+  titlePanel("Monthly Sales Analysis"),
+  sidebarLayout(
+    sidebarPanel(
+      # You can add any input controls here if needed
+    ),
+    mainPanel(
+      plotOutput("composite_mtd_plot")
+    )
+  )
+)
+
+# Define server function
+server <- function(input, output) {
+  # Generate dummy data
+  sales_data <- data.frame(
+    Month = seq(as.Date("2024-01-01"), by = "month", length.out = 12),
+    Sales = sample(100:1000, 12)
+  )
+  
+  # Render plot
+  output$composite_mtd_plot <- renderPlot({
+    p <- ggplot(sales_data, aes(x = Month, y = Sales)) +
+      geom_line(color = "blue") +
+      geom_area(fill = "blue", alpha = 0.3) +
+      geom_text(aes(label = Sales), vjust = -0.5, size = 3, show.legend = FALSE) +  
+      labs(title = "Monthly Sales",
+           x = "Month",
+           y = "Sales") +
+      theme_minimal()
+    
+    print(p) # Print the ggplot object
+  })
+}
+
+# Run the Shiny app
+shinyApp(ui = ui, server = server)

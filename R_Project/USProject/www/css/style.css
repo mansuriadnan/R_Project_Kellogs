@@ -1,0 +1,79 @@
+body{
+  width: 1920px;
+height: 970px;
+}
+.skin-blue .main-header .navbar{
+  background-color: #132043;
+}
+
+ul.nav.navbar-nav {
+    margin-top: 13px;
+    margin-right: 13px;
+}
+
+
+span#fiscalyear{
+    color: #FFF;
+font-family: Poppins;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+span.spanyear{
+  color: #279EFF;
+font-family: Plus Jakarta Sans;
+font-size: 15px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+.card{
+  width: 898px;
+height: 411px;
+flex-shrink: 0;
+border-radius: 5px;
+border: 1px solid #D5DBF0;
+background: #FFF;
+}
+
+.box
+{
+      box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+    margin-bottom: 1rem;
+        position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    
+  
+}
+
+.box-header
+{
+    background-color: transparent;
+    border-bottom: 1px solid #D5DBF0;
+    padding: .75rem 1.25rem;
+    position: relative;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+      height: 40px;
+    margin-top: 5px;
+}
+
+.small-box.bg-aqua {
+    width: 121px;
+    height: 90px;
+    border-radius: 5px;
+    background: linear-gradient(242deg, #D7C0AE 1.54%, #EEE3CB 100%);
+}
+
+

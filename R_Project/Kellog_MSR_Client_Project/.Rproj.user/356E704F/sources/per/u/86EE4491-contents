@@ -1,0 +1,35 @@
+dat <- structure(list(x = c(0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.05, 
+                            1.1, 1.15, 1.2, 1.25, 1.3), y1 = c(34, 30, 26, 23, 21, 19, 17, 
+                                                               16, 15, 13, 12, 12, 11), y2 = c(45, 39, 34, 31, 28, 25, 23, 21, 
+                                                                                               19, 17, 16, 15, 14)), .Names = c("x", "y1", "y2"), row.names = c(NA, 
+                                                                                                                                                                -13L), class = "data.frame")
+
+
+library(reshape2); library(ggplot2)
+dat2 <- melt(dat, id='x')
+
+ggplot(data=dat2, aes(x=x, y=value, color=variable)) + 
+  geom_point(size=3) + geom_line(size=.5) +
+  theme(panel.border = element_blank(), axis.line = element_line())
+
+# or using the template you used from talkstats...
+ggplot(data=dat2, aes(x=x, y=value, color=variable)) + 
+  geom_point(size=3) + geom_line(size=1.5) +
+  scale_y_continuous(breaks=seq(0, 45, by=5)) +
+  scale_x_continuous(breaks=seq(.7, 1.3, by=.05)) +
+  theme_bw() + ylab("Sample Size") + xlab("Mean Difference") +
+  theme(
+    axis.text = element_blank(),
+    legend.position="bottom", legend.title=element_blank(),
+        legend.key = element_rect(colour = 'white'), 
+        legend.background = element_rect(colour = "black")) +
+  ggtitle("Sample Size vs. Mean Difference by Power") +
+  theme(
+    
+    axis.title = element_blank(),
+  #  axis.text = element_blank(),
+    panel.grid.major = element_blank(), 
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(), 
+   # axis.line = element_line()
+    )

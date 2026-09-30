@@ -1,0 +1,44 @@
+library(bs4Dash)
+
+ui <- dashboardPage(
+  dashboardHeader(
+    title = "Basic dashboard"
+  ),
+  dashboardSidebar(),
+  dashboardBody(
+    tags$head(
+      tags$style(
+        HTML(
+          ".navbar {
+            background-color: #6C757D !important;
+          }
+          .navbar-dark .navbar-nav .nav-link {
+            color: white !important;
+          }
+          .navbar-brand {
+            color: white !important;
+          }"
+        )
+      )
+    ),
+    fluidRow(
+      box(plotOutput("plot1", height = 250)),
+      box(
+        title = "Controls",
+        sliderInput("slider", "Number of observations:", 1, 100, 50)
+      )
+    )
+  )
+)
+
+server <- function(input, output) {
+  set.seed(122)
+  histdata <- rnorm(500)
+  
+  output$plot1 <- renderPlot({
+    data <- histdata[seq_len(input$slider)]
+    hist(data)
+  })
+}
+
+shinyApp(ui, server)

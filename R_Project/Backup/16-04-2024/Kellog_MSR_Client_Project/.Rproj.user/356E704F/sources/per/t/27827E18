@@ -1,0 +1,26 @@
+{
+    "id": "27827E18",
+    "path": "D:/Project/R_Project/Backup/16-04-2024/Kellog_MSR_Client_Project/R/msr_page1.R",
+    "project_path": "R/msr_page1.R",
+    "type": "r_source",
+    "hash": "814623158",
+    "contents": "",
+    "dirty": false,
+    "created": 1712562178201.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "243,36",
+        "scrollLine": "237"
+    },
+    "folds": "79|57|112|0|\n148|43|153|0|\n259|57|268|2|\n270|64|277|2|\n279|83|287|2|\n289|47|315|2|\n",
+    "lastKnownWriteTime": 1713261977,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1713261977409,
+    "read_only": false,
+    "read_only_alternatives": []
+}

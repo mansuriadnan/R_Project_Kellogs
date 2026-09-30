@@ -1,0 +1,26 @@
+{
+    "id": "CFE61723",
+    "path": "D:/Project/R_Project/Kellog_MSR_Project_With_Design_Backup/render_mtd_ytd_indices.R",
+    "project_path": "render_mtd_ytd_indices.R",
+    "type": "r_source",
+    "hash": "2617014407",
+    "contents": "",
+    "dirty": false,
+    "created": 1712298945260.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "16,28",
+        "scrollLine": "7"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1712298255,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1712298255,
+    "read_only": false,
+    "read_only_alternatives": []
+}

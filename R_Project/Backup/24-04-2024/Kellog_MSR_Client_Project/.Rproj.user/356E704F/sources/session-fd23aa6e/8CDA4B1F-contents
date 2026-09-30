@@ -1,0 +1,16 @@
+library(ggplot2)
+
+df <- data.frame(x = c(12.5, 20), y = c(1:2), col = c("#FAA300", "#7492E3"))
+
+ggplot(df, aes(x = 0, xend = x, y = y, yend = y, color = col)) +
+  geom_hline(yintercept = c(1:2), size = 14, color = "#dfdfdf") +
+  geom_hline(yintercept = c(1:2), size = 13, color = "#f7f7f7") +
+  geom_segment(color = "#7492E3", size = 14, lineend = 'round') +
+  geom_segment(size = 13, lineend = 'round') +
+  scale_color_identity() +
+  geom_point(aes(x = x - 0.01 * y, size = y), color = "#7492E3", shape = 21, fill = 'white') +
+  scale_size_continuous(range = c(0, 10)) +  # Adjust the range of point sizes
+  scale_y_continuous(limits = c(0, 100)) +
+  scale_x_continuous(limits = c(0, 100)) +
+  coord_polar() +
+  theme_void()

@@ -1,0 +1,20 @@
+server <- function(input,output,session)
+{
+  output$list <- renderUI({
+    tags$div(class = "nav-menu",
+             tags$ul(
+               lapply(c("Fiscal Years", last_five_years), function(year) {
+                 if (year == "Fiscal Years") {
+                   tags$li(year, class = "fiscal-years")
+                 } else {
+                   tags$li(year)
+                 }
+               })
+             )
+    )
+  })
+}
+
+
+
+

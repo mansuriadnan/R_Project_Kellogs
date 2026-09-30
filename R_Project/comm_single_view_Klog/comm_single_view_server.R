@@ -1,0 +1,206 @@
+comm_single_view_server <- function(input, output, session, .data1, .data2, .data3, .data4) {
+  
+  #   .data1 = pringles_mcontr_and_mshare,
+  #   .data2 = p_test1,
+  #   .data3 = pringles_mshare,
+  #   .data4 = offtakes_dollar,
+  .end_date = redslim_end_date_p
+  
+  output$composite_offtake_plot <- renderPlot(
+    composite_offtake(
+      .data4, 
+      input$comm_composite_market_id, 
+      .end_date
+    )
+  )  
+  output$composite_share_plot <- renderPlot(
+    composite_share(
+      .data1, 
+      input$comm_composite_market_id, 
+      .end_date
+    )
+  )
+  
+  # output$composite_segment_share_plot <- renderPlot(
+  #   composite_segment_share(
+  #     .data3, 
+  #     input$comm_composite_market_id, 
+  #     .end_date
+  #   )
+  # )
+  # ----------------------------------------------------------------- |
+  render_offtake_share_indices <- function(.offtake_share) {
+    .fun <- paste0("build_composite_", .offtake_share, "_data")
+    if(.offtake_share == "offtake") {
+      .data <- .data4
+    } else {
+      .data <- .data1
+    }
+    renderText({
+      t <- expr((!!.fun)(.data, input$comm_composite_market_id, .end_date))
+      df <- eval(t)[[2]] 
+      p6m_mat <- df$index[[3]]
+      p3m_p6m <- df$index[[2]]
+      glue("<div style='display:flex'>
+      {index_value_box(p6m_mat, 'P6M/MAT')}
+<div style='width:3%'></div>
+      {index_value_box(p3m_p6m, 'P3M/P6M')}
+</div>")
+    })
+  }
+  
+  index_value_box <- function(.index, .label) {
+    background_color <- ifelse(.index >= 100, paste0(kellanova_jade, '10'), paste0(kellanova_red, '10'))
+    color <- ifelse(.index >= 100, kellanova_jade, kellanova_red)
+    glue("<div style='width:49%;text-align:left;background-color:{background_color};border-radius:0.5em;line-height:70%;padding-top:1.1em;padding-bottom:0.7em;padding-left:1em'>
+<span style='font-size:2em;font-weight:bold;color:{color}'>{.index}</span><br><br><span style='font-size:0.8em;font-weight:bold'>{.label}</span><br><span style='font-size:0.8em'>Index</span>
+</div> ")
+  }
+  
+  
+  output$composite_offtake_indices <- render_offtake_share_indices("offtake")
+  output$composite_share_indices   <- render_offtake_share_indices("share")
+  # -------------------------------------------------------------------------------- |
+  render_offtake_share_reactable <- function(.offtake_share) 
+    renderReactable({
+      .fun <- paste0("build_composite_", .offtake_share, "_data")
+      if(.offtake_share == "offtake") {
+        .data <- .data4
+      } else {
+        .data <- .data1
+      }
+      t <- expr((!!.fun)(.data, input$comm_composite_market_id, .end_date))
+      df <- eval(t)[[1]] 
+      composite_reactable(
+        df %>% filter(category != 'P1M'), 
+        .offtake_share
+      )
+    })
+  
+  
+  output$composite_offtake_table <- render_offtake_share_reactable("offtake")
+  output$composite_share_table   <- render_offtake_share_reactable("share")
+  # -------------------------------------------------------------------------- |
+  render_offtake_share_title <- function(.offtake_share) {
+    composite_title <- function(.value, .growth, .offtake_share) {
+      if(.offtake_share == 'offtake') {
+        .value_label <- "OFFTAKE"
+        .value_prefix <- '$'
+        .value_suffix <- 'M'
+        .growth_suffix <- '%'
+      } else {
+        .value_label <- "SHARE"
+        .value_prefix <- ''
+        .value_suffix <- '%'
+        .growth_suffix <- ' bps'
+      }
+      delta_glyph <- ifelse(.growth >= 0, "▲", "▼")
+      glyph_color <- ifelse(.growth >= 0, kellanova_jade, kellanova_red)
+      glue("<div style='display:flex;font-size:18px;border-bottom: 1px solid #E8E8E8;'>
+<div style='width:40%;text-align:left;padding-top:0.3em;'>
+<strong>{.value_label}</strong>&nbsp;&nbsp;&nbsp;<font color=gray>{redslim_end_date_by}</font>
+</div>
+<div style='width:36%'></div>
+<div style='width:18%;text-align:right'>
+<span style='font-weight:bold;font-size:1.5em'>{.value_prefix}{.value}{.value_suffix}</span>
+</div>
+<div style='width:1%;text-align:right'></div>
+<div style='width:6%;text-align:left;font-size:0.7em;padding-top:0.6em;line-height:95%'>
+<font color={glyph_color}>{delta_glyph} {.growth * 1e2}{.growth_suffix}</font><br><font color=gray>from YA</font>
+</div>
+</div>"
+      )
+    }
+    
+    .fun <- paste0("build_composite_", .offtake_share, "_data")
+    if(.offtake_share == "offtake") {
+      .data <- .data4
+    } else {
+      .data <- .data1
+    }
+    renderText({
+      t <- expr((!!.fun)(.data, input$comm_composite_market_id, .end_date))
+      df <- eval(t)[[1]] %>% filter(category == 'P1M')
+      composite_title(round(df$value, 1), df$from_ya/100, .offtake_share)
+    })
+  }
+  output$composite_offtake_title <- render_offtake_share_title("offtake")
+  output$composite_share_title   <- render_offtake_share_title("share")
+  
+  # ------------------------------------------------------------------------------------- |
+  render_segment_growth_value_box <- function(.core_t4bc)
+    renderText({
+      df <- compute_segment_share_growth_data(
+        .data3, 
+        input$comm_composite_market_id, 
+        .end_date, 
+        .core_t4bc
+      )
+      df <- df[[1]] %>% filter(category == 'P1M')
+      composite_value_box(
+        round(df$value, 1), 
+        df$from_ya,
+        .core_t4bc
+      )
+    })
+  output$composite_share_growth_value_core <- render_segment_growth_value_box("Core")
+  output$composite_share_growth_value_t4bc <- render_segment_growth_value_box("T4BC")
+  render_segment_share_growth_reactable <- function(.core_t4bc) 
+    renderReactable({
+      df <- compute_segment_share_growth_data(
+        .data3, 
+        input$comm_composite_market_id, 
+        .end_date, 
+        .core_t4bc
+      )
+      composite_reactable(
+        df[[1]] %>% filter(category != 'P1M')
+      )
+    })
+  output$composite_share_growth_table_core <- render_segment_share_growth_reactable("Core")
+  output$composite_share_growth_table_t4bc <- render_segment_share_growth_reactable("T4BC")
+  render_segment_growth_indices <- function(.core_t4bc) 
+    renderText({
+      df <- compute_segment_share_growth_data(
+        .data3, 
+        input$comm_composite_market_id, 
+        .end_date, 
+        .core_t4bc
+      )
+      composite_segment_share_index(
+        df[[2]]$ppi[[3]], #p6m_mat
+        df[[2]]$ppi[[2]], #p3m_p6m
+        .core_t4bc
+      )
+    })
+  output$composite_share_growth_index_core <- render_segment_growth_indices("Core")
+  output$composite_share_growth_index_t4bc <- render_segment_growth_indices("T4BC")
+  # ------------------------------------------------------------------------------------- |
+  render_segment_contr_value_box <- function(.core_t4bc) 
+    renderText({
+      df <- compute_segment_contr_data(
+        .data2, 
+        input$comm_composite_market_id
+      ) %>% 
+        filter(core_t4bc == .core_t4bc)
+      composite_value_box(
+        round(df$share * 1e2, 1), 
+        df$delta,
+        .core_t4bc
+      )
+    })
+  output$composite_contr_value_core <- render_segment_contr_value_box("Core")
+  output$composite_contr_value_t4bc <- render_segment_contr_value_box("T4BC")
+  output$composite_contr_plot_core  <- renderPlot(composite_contr(.data2, input$comm_composite_market_id, 'Core'))
+  output$composite_contr_plot_t4bc  <- renderPlot(composite_contr(.data2, input$comm_composite_market_id, 'T4BC'))
+  # --------------------------------------------------------------------------------- |
+  
+  output$composite_contr_label <- renderText({
+    glue("<strong>CONTRIBUTION BY SEGMENT</strong>&nbsp;&nbsp;&nbsp;<font color=gray>{redslim_end_date_by}</font>")
+  })
+  output$composite_segment_share_growth_label <- renderText({
+    glue("<strong>SHARE GROWTH BY SEGMENT</strong>&nbsp;&nbsp;&nbsp;<font color=gray>{redslim_end_date_by}</font>")
+  })
+
+  
+}

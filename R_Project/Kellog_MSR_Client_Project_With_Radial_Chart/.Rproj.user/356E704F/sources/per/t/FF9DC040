@@ -1,0 +1,26 @@
+{
+    "id": "FF9DC040",
+    "path": "D:/Project/R_Project/Kellog_MSR_Client_Project_With_Radial_Chart/R/msr_page1.R",
+    "project_path": "R/msr_page1.R",
+    "type": "r_source",
+    "hash": "8128040",
+    "contents": "",
+    "dirty": false,
+    "created": 1713422149182.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "305,64",
+        "scrollLine": "297"
+    },
+    "folds": "80|57|113|0|\n115|57|150|0|\n323|57|332|2|\n",
+    "lastKnownWriteTime": 1713954642,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1713954642245,
+    "read_only": false,
+    "read_only_alternatives": []
+}

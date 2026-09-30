@@ -1,0 +1,30 @@
+# Example R code to create a table using reactable
+library(reactable)
+
+# Sample data (you can replace this with your actual data)
+data <- data.frame(
+  Initiative = c("FY2023", "Pricing", "New Pricing", "Payee Pricing"),
+  Activity = c("Activity 1", "Activity 2", "Activity 3", "Activity 4"),
+  Timing = c("Q1", "Q2", "Q3", "Q4"),
+  NSWkg_Q1 = c(10.0, 15.0, 20.0, 25.0),
+  NSWkg_GM_Q1 = c("38.0%", "42.0%", "45.0%", "50.0%"),
+  Status = c("On Track", "WIP/Off Track", "On Track", "On Track"),
+  Actions = c("What 1", "What 2", "What 3", "What 4")
+)
+
+# Create the reactable
+reactable(data,
+          columns = list(
+            Initiative = colDef(align = "left"),
+            Activity = colDef(align = "left"),
+            Timing = colDef(align = "center"),
+            NSWkg_Q1 = colDef(align = "center"),
+            NSWkg_GM_Q1 = colDef(align = "center"),
+            Status = colDef(align = "center"),
+            Actions = colDef(align = "left")  # Updated to "Actions"
+          ),
+          defaultColDef = colDef(width = 150),
+          striped = TRUE,
+          bordered = TRUE,
+          highlight = TRUE
+)
